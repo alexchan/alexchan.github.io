@@ -17,6 +17,14 @@ It should all apply to our current stable version (found in the `master`
 branch). If this is not the case, [please submit a
 fix to our docs repo](https://github.com/octopress/docs).
 
+## Steps For Posting
+$ rake new_post["New Post"]
+$ rake generate
+$ git add .
+$ git commit -am "Some comment here." 
+$ git push origin source
+$ rake deploy
+
 ## Contributing
 
 [![Build Status](https://travis-ci.org/imathis/octopress.png?branch=master)](https://travis-ci.org/imathis/octopress)
