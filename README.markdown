@@ -18,12 +18,12 @@ branch). If this is not the case, [please submit a
 fix to our docs repo](https://github.com/octopress/docs).
 
 ## Steps For Posting
-$ rake new_post["New Post"]
-$ rake generate
-$ git add .
-$ git commit -am "Some comment here." 
-$ git push origin source
-$ rake deploy
+1. $ rake new_post["New Post"]
+2. $ rake generate
+3. $ git add .
+4. $ git commit -am "Some comment here." 
+5. $ git push origin source
+6. $ rake deploy
 
 ## Contributing
 
