@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Victor Chan</title><link href="http://www.alexvictorchan.com/" rel="alternate"></link><link href="http://www.alexvictorchan.com/feeds/technology.atom.xml" rel="self"></link><id>http://www.alexvictorchan.com/</id><updated>2014-04-23T19:37:00-07:00</updated><entry><title>Ubuntu 14.04 on 13" Macbook Pro</title><link href="http://www.alexvictorchan.com/2014/04/23/ubuntu-14-04-on-13-macbook-pro/" rel="alternate"></link><updated>2014-04-23T19:37:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-04-23:2014/04/23/ubuntu-14-04-on-13-macbook-pro/</id><summary type="html">&lt;p&gt;I love Ubuntu, especially as a development environment.  Since the
+release of 14.04, I decided to try it out on my 13" Macbook Pro Retina.&lt;/p&gt;
+&lt;h1&gt;&lt;span style="color: #555555; font-family: 'Bree Serif', Georgia, serif; font-size: 24px; line-height: 1.5;"&gt;1. Partition&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;The first step is pretty simple.  You can resize the Macintosh partition
+using the OSX Disk Utility.  I resized the OSX partition to 152GB and
+left the rest as free space.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png"&gt;&lt;img alt="" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;2. Create USB Installer&lt;/h1&gt;
+&lt;p&gt;You should follow the
+directions &lt;a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx"&gt;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&lt;/a&gt; to
+create a 64-bit Ubuntu USB startup drive. At the end of the
+instructions, you'll see an error message indicating that OSX isn't able
+to read the drive.
+&lt;a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261.png"&gt;&lt;img alt="" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261-300x118.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Don't worry, this is normal and it should still work as a USB installer
+but you just won't be able to read/write to the drive itself. (OPTIONAL
+but RECOMMENDED) Since you won't be able to read/write to this drive, if
+you have another USB stick handy, you should copy the wifi drivers to
+the 2nd USB stick.
+&lt;a href="http://packages.ubuntu.com/trusty/amd64/bcmwl-kernel-source/download"&gt;http://packages.ubuntu.com/trusty/amd64/bcmwl-kernel-source/download&lt;/a&gt;
+&lt;a href="http://packages.ubuntu.com/trusty/all/dkms/download"&gt;http://packages.ubuntu.com/trusty/all/dkms/download&lt;/a&gt; After the Ubuntu
+installation, wifi will not work and you will need to install the driver
+and one of its dependencies to get it working.  The other 2 dependencies
+should already be included as part of the installation.&lt;/p&gt;
+&lt;h1&gt;3. Install Boot Manager&lt;/h1&gt;
+&lt;p&gt;I used rEFInd as the boot manager instead of rEFIt.  It seems to work
+for me.  You can find it
+here: &lt;a href="http://www.rodsbooks.com/refind/getting.html"&gt;http://www.rodsbooks.com/refind/getting.html&lt;/a&gt; and download the
+binary zip file.  Once downloaded and unzipped, open a Terminal window
+and install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;Downloads&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;refind&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.6.7&lt;/span&gt;  
+ &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;4. Install Ubuntu&lt;/h1&gt;
+&lt;p&gt;Here comes the fun part.  Insert your Ubuntu USB installer and restart
+your computer.  When the computer restarts, you should see your new boot
+manager screen with an Apple and a triangle shaped icon for the Ubuntu
+installer.  Right arrow over to the installer and hit Enter to select
+it.  This will load the typical Ubuntu installer.  Select "Install
+Ubuntu".  If this is the first time you are installing Ubuntu, it should
+give you the option to install Ubuntu alongside Mac OSX.  If you are
+reinstalling over a bad installation, it will give you the option to
+erase Ubuntu only and reinstall.  &lt;strong&gt;WARNING!&lt;/strong&gt; If you are attempting a
+reinstall and select this option, the previous swap partition will not
+be reused or erased.  A new one will be created meaning you will lose
+about 8GBs of space for nothing.  Instead of having the installer create
+the partitions for you, initial install or reinstall, I recommend
+selecting the "Something else" option and create your own partitions. If
+you select "Something else" you will see a screen with a list of
+partitions.  If this is a reinstall, scroll to the bottom of the list
+and delete the previous install's paritions.  At the very bottom of the
+list is "Free space".  Select that and click on the "+" sign to create a
+new partition.  You can create a root "/" using ext4 with a size of
+about 25GB.  Next, create a swap partition with a size around 8 to 16GB.
+ Finally, create an ext4 home "/home" partition with the rest of the
+remaining space and continue with the installation.  After the
+installation, it will ask you to reboot and you should do so.  If you
+get a blank screen after the message, just hit the space bar and it will
+continue.&lt;/p&gt;
+&lt;h1&gt;5. Setting Up WIFI&lt;/h1&gt;
+&lt;p&gt;After you restart, you should see a Ubuntu logo, an Apple logo and the
+Linux penguin.  You may also see the diamond shaped logo if your USB
+stick is still plugged in.  If you didn't have a 2nd USB stick, you will
+need to get the wifi drivers.  Select the Apple logo to boot into Mac
+OS, format the USB installer so it can be read and copy the drivers from
+the links above onto the USB stick.  Reboot. When you have your wifi
+drivers, select the penguin logo.  You should see the normal GRUB menu
+on the left hand side.  Go ahead and select the first option, "Ubuntu"
+and continue to log in and admire your beautiful Ubuntu installation.
+ You can change the resolution by clicking on the Dash and selecting
+"Displays" to make things easier to read. Insert your USB stick with
+your wifi drivers if you haven't already done so and open a Terminal.
+Change to the directory of the USB stick and install each of the 3
+dependencies first and then the wifi driver last.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USERNAME&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USB&lt;/span&gt; &lt;span class="n"&gt;DRIVE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;  &lt;span class="n"&gt;dkms&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;bcmwl&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You should now have wifi access.  Woohoo! From here on out, everything
+should be working.  I haven't encountered any problems and I found 14.04
+to be very fast and smooth.&lt;/p&gt;</summary></entry><entry><title>Command-t for vim fails on Mavericks (and how to fix it)</title><link href="http://www.alexvictorchan.com/2014/01/07/command-t-for-vim-fails-on-mavericks-and-how-to-fix-it/" rel="alternate"></link><updated>2014-01-07T00:53:00-08:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-01-07:2014/01/07/command-t-for-vim-fails-on-mavericks-and-how-to-fix-it/</id><summary type="html">&lt;p&gt;I recently had to rebuild my dotfiles and haven't done so for several
+months, before I updated my Mac OSX to Mavericks. I got a nice little
+error when I tried to use vim after building command-t:&lt;/p&gt;
+&lt;p&gt;Vim: Caught deadly signal SEGV&lt;br /&gt;
+Vim: Finished.&lt;br /&gt;
+Segmentation fault&lt;/p&gt;
+&lt;p&gt;Apparently Mavericks uses ruby 2.0 instead of 1.8. Vim was compiled with
+Ruby1.8 so building with Ruby 2.0 fails. I fixed the issue by going to:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cd /System/Library/Frameworks/Ruby.framework/Versions&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In that directory were both versions of Ruby and a "Current" symlink
+pointing to 2.0. I deleted the symlink and created a new one to point to
+1.8 and rebuilt command-t. Aha! It didn't work. It was missing the ruby
+header file for 1.8. I fixed that by installing Xcode command line tools
+using the terminal.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;xcode-select --install&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;After that, I went back to build command-t and it was working again. I
+also deleted the "Current" symlink and recreated a new one again to
+point back to 2.0.&lt;/p&gt;</summary></entry><entry><title>Installing Ubuntu 13.10 on 13" Macbook Pro Retina</title><link href="http://www.alexvictorchan.com/2013/11/02/installing-ubuntu-13-10-on-13-macbook-pro-retina/" rel="alternate"></link><updated>2013-11-02T22:05:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-11-02:2013/11/02/installing-ubuntu-13-10-on-13-macbook-pro-retina/</id><summary type="html">&lt;p&gt;The timing of the release of OSX mavericks and Ubuntu 13.10 was
+interesting to say the least.  I was naive enough to go ahead and
+upgrade my OSX system to mavericks without fully backing up both my OSX
+and Ubuntu data.  The good news is that the upgrade went well on the OSX
+side.  The bad news is that my Ubuntu partition was not able to load.  I
+wanted to restore Ubuntu on my Mac and found my &lt;a href="/2013/05/01/installing-ubuntu-13-04-on-13-macbook-pro-retina-102/"&gt;previous
+post&lt;/a&gt;
+to be extremely helpful.  The only difference was to grab the correct
+&lt;a href="http://packages.ubuntu.com/saucy/bcmwl-kernel-source"&gt;wifi drivers&lt;/a&gt;
+from Saucy Salamander instead of Raring Ringtail.&lt;/p&gt;</summary></entry><entry><title>Tastypie and App Engine's NDB models</title><link href="http://www.alexvictorchan.com/2013/07/27/tastypie-and-app-engines-ndb-models/" rel="alternate"></link><updated>2013-07-27T20:29:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-07-27:2013/07/27/tastypie-and-app-engines-ndb-models/</id><summary type="html">&lt;p&gt;Tastypie is a great library to plug in and get a REST API fairly easily.
+ It's a little more difficult when working with NDB models.  I've
+implemented a version of Tastypie's
+&lt;a href="https://github.com/alexchan/django-tastypie/blob/master/tastypie/ndb_resources.py"&gt;resources.py&lt;/a&gt;, to
+work with App Engine's datastore models.  Simply import this version and
+you can work with Tastypie in the familiar manner except inherit from
+NDBResource instead of Resource.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;MyModelResource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NDBResource&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+    &lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;Meta&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;resource_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;my_model&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+        &lt;span class="n"&gt;object_class&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MyModel&lt;/span&gt;
+        &lt;span class="n"&gt;authentication&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Authentication&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;authorization&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Authorization&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;filtering&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;active&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;exact&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,),&lt;/span&gt;
+            &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;archived&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;exact&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,),&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Setting up Cloud9 locally on a Chromebook Pixel (or any debian system)</title><link href="http://www.alexvictorchan.com/2013/06/19/setting-up-cloud9-locally-on-a-chromebook-pixel-or-any-debian-system/" rel="alternate"></link><updated>2013-06-19T05:07:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-06-19:2013/06/19/setting-up-cloud9-locally-on-a-chromebook-pixel-or-any-debian-system/</id><summary type="html">&lt;h2&gt;BACKGROUND&lt;/h2&gt;
+&lt;p&gt;I received a Chromebook Pixel from Google I/O and although the screen is
+absolutely beautiful, Chrome OS itself is somewhat limited.  I've set up
+Crouton from the excellent instructions located
+here: &lt;a href="https://github.com/dnschneid/crouton"&gt;https://github.com/dnschneid/crouton&lt;/a&gt;.  I could have run Ubuntu
+in  chroot but it doesn't quite look or feel the same.  I also wanted to
+keep my system light so I've opted only for crouton's command line tools
+instead of starting the window manager.  Without a window manager, it's
+difficult to get an IDE working and after some research, I settled on
+Cloud9 IDE.  Below is my experience setting it up.&lt;/p&gt;
+&lt;h2&gt;REQUIREMENTS&lt;/h2&gt;
+&lt;p&gt;First, run the following to install the necessary Ubuntu packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;essential&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="n"&gt;libssl&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;apache2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;utils&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;libxml2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, it's very important to install the correct node version.  I
+installed from the Ubuntu package manager which doesn't work well.  I
+also tried the latest version which also doesn't work well and also a
+different version from other tutorials.  I received different errors
+during the "npm install" step.  The best way to do this is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//raw.github.com/creationix/nvm/master/install.sh | sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Logout and then log back in and execute the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;nvm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="mf"&gt;0.8.8&lt;/span&gt;
+&lt;span class="n"&gt;nvm&lt;/span&gt; &lt;span class="n"&gt;alias&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="mf"&gt;0.8.8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;At this point, you should have satisfied Cloud9's requirements.&lt;/p&gt;
+&lt;h2&gt;INSTALLATION&lt;/h2&gt;
+&lt;p&gt;Installation is now pretty straight-forward.  You can follow the
+directions on their Github (&lt;a href="https://github.com/ajaxorg/cloud9/"&gt;https://github.com/ajaxorg/cloud9/&lt;/a&gt;) page
+or run the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//github.com/ajaxorg/cloud9.git&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;cloud9&lt;/span&gt;
+&lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The above install steps create a &lt;code&gt;cloud9&lt;/code&gt; directory with
+a &lt;code&gt;bin/cloud9.sh&lt;/code&gt; script that can be used to start Cloud9:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cloud9&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Optionally, you may specify the directory you'd like to edit:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cloud9&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;myproject&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Cloud9 will be started as a web server on port &lt;code&gt;-p 3131&lt;/code&gt;, you can access
+it by pointing your browser
+to:&lt;a href="http://localhost:3131/"&gt;http://localhost:3131&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Enjoy your new web IDE!&lt;/p&gt;</summary></entry><entry><title>Installing Ubuntu 13.04 on 13" Macbook Pro Retina (10,2)</title><link href="http://www.alexvictorchan.com/2013/05/01/installing-ubuntu-13-04-on-13-macbook-pro-retina-102/" rel="alternate"></link><updated>2013-05-01T18:08:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-05-01:2013/05/01/installing-ubuntu-13-04-on-13-macbook-pro-retina-102/</id><summary type="html">&lt;p&gt;A couple of weeks ago, I purchased the 13" Macbook Pro Retina. I spent a
+long time thinking about the purchase because I wanted something that
+would work well with Ubuntu and had at least 1080p and 8GB RAM. Since
+I've bought it, I gave OSX a try in the hopes that it will be usable for
+development since I'm almost exclusively on Ubuntu for the last several
+years. I think it's definitely usable but it's hard to change old habits
+so I installed Ubuntu on the Macbook. The following is my process, my
+mistakes and what I've learned.&lt;/p&gt;
+&lt;h1&gt;&lt;span style="line-height: 24px;"&gt;1. Partition&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;The first step is pretty simple.  You can resize the Macintosh partition
+using the OSX Disk Utility.  I resized the partition to 88GB and left
+the rest as free space.&lt;/p&gt;
+&lt;h1&gt;2. Create USB Installer&lt;/h1&gt;
+&lt;p&gt;You should follow the
+directions &lt;a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx"&gt;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&lt;/a&gt; to
+create a 64-bit Ubuntu USB startup drive.&lt;br /&gt;
+At the end of the instructions, you'll see an error message indicating
+that OSX isn't able to read the drive.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM.png"&gt;&lt;img alt="Screen-Shot-2013-10-30-at-9.20.37-PM" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-300x118.png" /&gt;&lt;/a&gt;&lt;br /&gt;
+Don't worry, this is normal and it should still work as a USB installer
+but you just won't be able to read/write to the drive itself.&lt;/p&gt;
+&lt;p&gt;(OPTIONAL but RECOMMENDED) Since you won't be able to read/write to this
+drive, if you have another USB stick handy, you should upload the &lt;a href="http://packages.ubuntu.com/raring/bcmwl-kernel-source" title="wifi driver"&gt;wifi
+driver&lt;/a&gt;
+to the 2nd USB stick.  After the Ubuntu installation, wifi will not work
+and you will need to install the driver and its 3 dependencies to get it
+working.&lt;/p&gt;
+&lt;h1&gt;3. Install Boot Manager&lt;/h1&gt;
+&lt;p&gt;I used rEFInd as the boot manager instead of rEFIt.  It seems to work
+for me.  You can find it
+here: &lt;a href="http://www.rodsbooks.com/refind/getting.html"&gt;http://www.rodsbooks.com/refind/getting.html&lt;/a&gt; and download the
+binary zip file.  Once downloaded and unzipped, open a Terminal window
+and install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;Downloads&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;refind&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.6.7&lt;/span&gt;  
+ &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;4. Install Ubuntu&lt;/h1&gt;
+&lt;p&gt;Here comes the fun part.  Insert your Ubuntu USB installer and restart
+your computer.  When the computer restarts, you should see your new boot
+manager screen with an Apple and a triangle shaped icon for the Ubuntu
+installer.  Right arrow over to the installer and hit Enter to select
+it.  This will load the typical Ubuntu installer.  Select "Install
+Ubuntu".  If this is the first time you are installing Ubuntu, it should
+give you the option to install Ubuntu alongside Mac OSX.  If you are
+reinstalling over a bad installation, it will give you the option to
+erase Ubuntu only and reinstall.  &lt;strong&gt;WARNING!&lt;/strong&gt; If you are attempting a
+reinstall and select this option, the previous swap partition will not
+be reused or erased.  A new one will be created meaning you will lose
+about 8GBs of space for nothing.  Instead of having the installer create
+the partitions for you, initial install or reinstall, I recommend
+selecting the "Something else" option and create your own partitions.&lt;/p&gt;
+&lt;p&gt;If you select "Something else" you will see a screen with a list of
+partitions.  If this is a reinstall, scroll to the bottom of the list
+and delete the previous install's paritions.  At the very bottom of the
+list is "Free space".  Select that and click on the "+" sign to create a
+new partition.  You can create a root "/" using ext4 with a size of
+about 25GB.  Next, create a swap partition with a size around 8 to 16GB.
+ Finally, create an ext4 home "/home" partition with the rest of the
+remaining space and continue with the installation.  After the
+installation, it will ask you to reboot and you should do so.  If you
+get a blank screen after the message, just hit the space bar and it will
+continue.&lt;/p&gt;
+&lt;h1&gt;5. Setting Up WIFI&lt;/h1&gt;
+&lt;p&gt;After you restart, you should see a Ubuntu logo, an Apple logo and the
+Linux penguin.  You may also see the diamond shaped logo if your USB
+stick is still plugged in.  If you didn't have a 2nd USB stick, you will
+need to get the wifi drivers.  Select the Apple logo to boot into Mac
+OS, format the USB installer so it can be read and copy the drivers from
+the link above onto the USB stick.  Reboot.&lt;/p&gt;
+&lt;p&gt;When you have your wifi drivers, select the penguin, &lt;strong&gt;NOT&lt;/strong&gt; the Ubuntu
+logo.  If you select the Ubuntu logo, I think it will go to the grub
+rescue screen and I had to hold down the power button to reboot again.
+ After selecting the penguin, you should see the normal GRUB menu on the
+left hand side.  Go ahead and select the first option, "Ubuntu" and
+continue to log in and admire your beautiful Ubuntu installation.  You
+can change the resolution by clicking on the Dash and selecting
+"Displays" to make things easier to read.&lt;/p&gt;
+&lt;p&gt;Insert your USB stick with your wifi drivers if you haven't already done
+so and open a Terminal. Change to the directory of the USB stick and
+install each of the 3 dependencies first and then the wifi driver last.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USERNAME&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USB&lt;/span&gt; &lt;span class="n"&gt;DRIVE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;  &lt;span class="n"&gt;dkms&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;libc6&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;bcmwl&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You should now have wifi access.  Woohoo!&lt;/p&gt;
+&lt;h1&gt;6. Repair EFI Boot Manager&lt;/h1&gt;
+&lt;p&gt;I needed to do this so that I could load Ubuntu's 64 bit EFI boot
+manager.  In the terminal, enter the following commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="n"&gt;ppa&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;yannubuntu&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;boot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repair&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;boot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repair&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;boot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repair&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When the popup appears, click on "Advanced options" and go to the "GRUB
+location" tab.  Check the box next to the option "Separate /boot/efi
+partition" and click on "Apply".  You will be presented with a series of
+commands to enter into the Terminal.  Follow the instructions.  I ran
+into a dependency error on the last command I was presented with related
+to efi-amd64.  Go ahead and continue forward anyway and you will get the
+message that boot repair was successful.  Just for peace of mind, I ran
+the boot-repair command again but was not presented with the commands to
+enter and the final message indicated the repair was successful.  If
+someone understands this section better than I, please let me know.
+ &lt;strong&gt;After rebooting, you should now select the Ubuntu icon and not the
+penguin icon.&lt;/strong&gt;&lt;/p&gt;
+&lt;h1&gt;7. Fix Sound Setting&lt;/h1&gt;
+&lt;p&gt;The last thing I had to fix was the sound setting.  Fortunately it was
+extremely easy.  Edit the file: /etc/modprobe.d/alsa-base.conf and add
+the following line to the bottom.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="n"&gt;snd&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hda&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intel&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mbp101&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;8. Additional Notes&lt;/h1&gt;
+&lt;p&gt;At this point, you should be good to go. Everything else seems to be
+working well and it's customizations from this point.  One important
+note, &lt;strong&gt;DO NOT INSTALL NVIDIA DRIVERS&lt;/strong&gt;.  This will screw up your
+installation and you will not be able to boot back in.  Also, do not
+install laptop-mode-tools as that will also prevent you from logging
+back in.  In the event you do and you need to recover, boot from your
+USB startup drive and select "Try Ubuntu".  Open a terminal and enter
+the following commands while replacing "/dev/sda4" with your root
+partition. The "Disks" utility can help you find out what that is.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;chroot&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You will now be able to do things as if you're already logged in such
+as:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;purge&lt;/span&gt; &lt;span class="n"&gt;laptop&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Boot loaders&lt;/h3&gt;
+&lt;p&gt;I don't like seeing the Microsoft logo as an option.  I removed the
+Microsoft directory from /boot/efi/EFI.  You can move it somewhere else
+in case you want to put it back.&lt;/p&gt;
+&lt;p&gt;I like fast boot times.  If you log into the Mac OSX side and edit
+/boot/refind/refind.conf, you can reduce the timeout to a few seconds so
+that it will automatically load Ubuntu faster.  Also, on the GRUB side,
+you can edit /etc/default/grub and reduce the timeout value there as
+well.&lt;/p&gt;
+&lt;p&gt;I hope this helps someone save time instead of trying to figure it all
+out.  I'd definitely like to hear from anyone if this helps them and if
+there are any problems, please let me know!&lt;/p&gt;
+&lt;h1&gt;9. References&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://randomtutor.blogspot.com/2013/02/installing-ubuntu-1304-on-retina.html"&gt;http://randomtutor.blogspot.com/2013/02/installing-ubuntu-1304-on-retina.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://cberner.com/2013/03/01/installing-ubuntu-13-04-on-macbook-pro-retina/"&gt;http://cberner.com/2013/03/01/installing-ubuntu-13-04-on-macbook-pro-retina/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://commandline.org.uk/2013/03/08/lubuntu_on_macbook_pro_retina.html"&gt;http://commandline.org.uk/2013/03/08/lubuntu_on_macbook_pro_retina.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Postgres and postgis</title><link href="http://www.alexvictorchan.com/2013/03/20/postgres-and-postgis/" rel="alternate"></link><updated>2013-03-20T02:53:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-03-20:2013/03/20/postgres-and-postgis/</id><summary type="html">&lt;p&gt;I've recently have to set up postgres again and I always have to keep
+looking up the commands for setting up a new user. On Ubuntu 13.04, I
+installed postgresql and postgis using apt-get.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;libpq&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;9.1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;postgis&lt;/span&gt; &lt;span class="n"&gt;postgresql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;9.1&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;psycopg2&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;software&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;properties&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;After installation, I had to create a template postgis database and set
+up a user. I ran the following on the command line to set up the
+database template.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;createdb&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="n"&gt;UTF8&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;createlang&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="n"&gt;plpgsql&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;CREATE EXTENSION hstore;&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postgresql&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;9.1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postgis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postgis&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postgresql&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;9.1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postgis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;spatial_ref_sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;select postgis_lib_version();&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GRANT ALL ON geometry_columns TO PUBLIC;&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GRANT ALL ON spatial_ref_sys TO PUBLIC;&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;su&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;psql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;U&lt;/span&gt; &lt;span class="n"&gt;postgres&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;template_postgis&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GRANT ALL ON geography_columns TO PUBLIC;&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, log into psql as the postgres user and execute the following
+commands while substituting the bracketed values:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;database&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DATABASE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;template_postgis&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USER&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PASSWORD&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;grant&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;privileges&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;database&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DATABASE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USER&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="n"&gt;alter&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;USER&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;createdb&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Uploads To Django On Google App Engine And Blobstore</title><link href="http://www.alexvictorchan.com/2013/03/11/uploads-to-django-on-google-app-engine-and-blobstore/" rel="alternate"></link><updated>2013-03-11T20:25:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-03-11:2013/03/11/uploads-to-django-on-google-app-engine-and-blobstore/</id><summary type="html">&lt;h2&gt;Problem&lt;/h2&gt;
+&lt;p&gt;I absolutely love Django. There are many reasons to love the framework
+but sometimes it doesn't seem to work out. I recently tried to upload
+files using Google's App Engine and Django to Google's blobstore. The
+main reason why it doesn't work is because of an issue with Django and
+supporting multi-part values.&lt;/p&gt;
+&lt;h2&gt;Alternatives&lt;/h2&gt;
+&lt;p&gt;One alternative is to use the django-filetransfers library and upload
+assets to another repository such as S3. If you need to stay on Google
+App Engine, another possibility is to sadly use another web framework
+such as webapp2.&lt;/p&gt;</summary></entry><entry><title>How To Rearrange Letters In A PDF</title><link href="http://www.alexvictorchan.com/2013/03/08/how-to-rearrange-letters-in-a-pdf/" rel="alternate"></link><updated>2013-03-08T22:06:00-08:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-03-08:2013/03/08/how-to-rearrange-letters-in-a-pdf/</id><summary type="html">&lt;p&gt;Recently I was tasked with modifying a PDF.  Specifically, I was asked
+to take an existing PDF template and replace placeholder text with
+dynamic content.  Since I've worked with PDFs before, I knew that it
+might be somewhat difficult but hopefully not something I couldn't
+handle given my prior experience.&lt;/p&gt;
+&lt;h2&gt;THE PROCESS&lt;/h2&gt;
+&lt;p&gt;The process, that was explained to me, was that I would receive a PDF
+"template" that contained a background image and text embedded in the
+PDF. What I need to do was to find a way to replace this hard-coded
+template text with dynamic text from the database.&lt;/p&gt;
+&lt;h2&gt;LIBRARIES&lt;/h2&gt;
+&lt;p&gt;I started by looking into all the PDF libraries I could find that might
+help me. There was some mention of Perl scripts throughout my research
+but that didn't seem to work for me. I eventually settled on a couple of
+useful libraries. One was the
+&lt;a href="http://www.pdflib.com/products/tet/" title="TET"&gt;TET&lt;/a&gt; (Text Extraction
+Toolkit). It was very useful in determining the font, color, and
+positioning of text within the PDF. Another useful library was
+&lt;a href="http://www.reportlab.com/software/reportlab-plus/" title="PageCatcher"&gt;PageCatcher&lt;/a&gt;
+by ReportLab. They had the ability to leverage an existing PDF as a
+"canvas" and write text on it.&lt;/p&gt;
+&lt;h2&gt;SOLUTION&lt;/h2&gt;
+&lt;p&gt;Unfortunately, the solution I proposed required 2 PDFs, one with the
+hard-coded text and another that was a blank canvas to write on. I was
+able to use the TET library to extract the text information from the
+first PDF and then write my dynamic text on the second PDF.&lt;/p&gt;
+&lt;p&gt;There seems to be a possible solution to actually replace existing text
+within a PDF. Another thing that I learned is that fonts within a PDF
+are closely tied with the actual text and not necessarily the PDF in
+general. This means that if you wanted to replace certain letters in a
+PDF, you would also need another page in the PDF that has all the
+letters in the alphabet as a source to be used to replace the existing
+text.&lt;/p&gt;</summary></entry><entry><title>How To Configure Postfix for SES</title><link href="http://www.alexvictorchan.com/2013/03/05/how-to-configure-postfix-for-ses/" rel="alternate"></link><updated>2013-03-05T17:49:00-08:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2013-03-05:2013/03/05/how-to-configure-postfix-for-ses/</id><summary type="html">&lt;p&gt;I've recently set up my own email server.  I've read several tutorials
+on how to install and configure Postfix and IMAP.  One thing that I
+noticed is that if you send email from a server without a good
+reputation, there's a high probability it will end up in the Spam/Junk
+folder or worse, not even get delivered.  I decided to leverage SES as
+my SMTP server instead of letting my local installation of Postfix do
+all the work.&lt;/p&gt;
+&lt;p&gt;Install stunnel:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;stunnel&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add these lines to /etc/stunnel/stunnel.conf and make sure it starts
+properly (you may have to edit /etc/default/stunnel so that it starts
+automatically on boot):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[smtp-tls-wrapper]&lt;/span&gt;
+&lt;span class="na"&gt;accept&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;127.0.0.1:1125&lt;/span&gt;
+&lt;span class="na"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;yes&lt;/span&gt;
+&lt;span class="na"&gt;connect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;email-smtp.us-east-1.amazonaws.com:465&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update Postfix /etc/postfix/main.cf. There may already be smtpd versions
+but you need to add the smtp version of the options as well.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;relayhost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1125&lt;/span&gt;
+&lt;span class="n"&gt;smtp_sasl_auth_enable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;span class="n"&gt;smtp_sasl_security_options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;noanonymous&lt;/span&gt;
+&lt;span class="n"&gt;smtp_tls_security_level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;may&lt;/span&gt;
+&lt;span class="n"&gt;smtp_sasl_password_maps&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postfix&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sasl_passwd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create/Edit /etc/postfix/sasl_passwd file with the contents and
+replacing username/password from credentials.csv&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1125&lt;/span&gt; &lt;span class="n"&gt;USERNAME&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;PASSWORD&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Execute the command line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;postmap&lt;/span&gt; &lt;span class="n"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postfix&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sasl_passwd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A hash file is created. You can remove the original
+/etc/postfix/sasl_passwd file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postfix&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sasl_passwd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Restart Postfix:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;postfix&lt;/span&gt; &lt;span class="n"&gt;restart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You should also update your DNS TXT field with an SPF record to bypass
+Spam/Junk folders:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s"&gt;&amp;quot;v=spf1 a mx a:yourserver.yourdomain.com include:yourdomain.com include:amazonses.com ~all&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You should also set up DKIM to have your emails less likely to be
+identified as spam.&lt;/p&gt;</summary></entry></feed>

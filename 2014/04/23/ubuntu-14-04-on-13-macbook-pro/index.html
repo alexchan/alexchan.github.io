@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Ubuntu 14.04 on 13" Macbook Pro - Alex Victor Chan</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="../../../../2014/04/23/ubuntu-14-04-on-13-macbook-pro/">
+
+        <meta name="author" content="alex" />
+        <meta name="description" content="I love Ubuntu, especially as a development environment. Since the release of 14.04, I decided to try it out on my 13&#34; Macbook Pro Retina. 1. Partition The first step is pretty simple. You can resize the Macintosh partition using the OSX Disk Utility. I resized the OSX partition ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../../../../theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="../../../../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../../../../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../theme/css/style.css" type="text/css"/>
+
+        <link href="../../../../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Alex Victor Chan ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../../../../" class="navbar-brand">
+Alex Victor Chan            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="../../../../pages/about.html">
+                             About
+                          </a></li>
+                        <li class="active">
+                            <a href="../../../../category/technology.html">Technology</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../../../../archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="../../../../2014/04/23/ubuntu-14-04-on-13-macbook-pro/"
+                       rel="bookmark"
+                       title="Permalink to Ubuntu 14.04 on 13" Macbook Pro">
+                        Ubuntu 14.04 on 13" Macbook Pro
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-04-23T19:37:00"> Wed 23 April 2014</time>
+    </span>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>I love Ubuntu, especially as a development environment.  Since the
+release of 14.04, I decided to try it out on my 13" Macbook Pro Retina.</p>
+<h1><span style="color: #555555; font-family: 'Bree Serif', Georgia, serif; font-size: 24px; line-height: 1.5;">1. Partition</span></h1>
+<p>The first step is pretty simple.  You can resize the Macintosh partition
+using the OSX Disk Utility.  I resized the OSX partition to 152GB and
+left the rest as free space.</p>
+<p><a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png"><img alt="" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png" /></a></p>
+<h1>2. Create USB Installer</h1>
+<p>You should follow the
+directions <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx</a> to
+create a 64-bit Ubuntu USB startup drive. At the end of the
+instructions, you'll see an error message indicating that OSX isn't able
+to read the drive.
+<a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261.png"><img alt="" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261-300x118.png" /></a></p>
+<p>Don't worry, this is normal and it should still work as a USB installer
+but you just won't be able to read/write to the drive itself. (OPTIONAL
+but RECOMMENDED) Since you won't be able to read/write to this drive, if
+you have another USB stick handy, you should copy the wifi drivers to
+the 2nd USB stick.
+<a href="http://packages.ubuntu.com/trusty/amd64/bcmwl-kernel-source/download">http://packages.ubuntu.com/trusty/amd64/bcmwl-kernel-source/download</a>
+<a href="http://packages.ubuntu.com/trusty/all/dkms/download">http://packages.ubuntu.com/trusty/all/dkms/download</a> After the Ubuntu
+installation, wifi will not work and you will need to install the driver
+and one of its dependencies to get it working.  The other 2 dependencies
+should already be included as part of the installation.</p>
+<h1>3. Install Boot Manager</h1>
+<p>I used rEFInd as the boot manager instead of rEFIt.  It seems to work
+for me.  You can find it
+here: <a href="http://www.rodsbooks.com/refind/getting.html">http://www.rodsbooks.com/refind/getting.html</a> and download the
+binary zip file.  Once downloaded and unzipped, open a Terminal window
+and install:</p>
+<div class="highlight"><pre><span class="n">cd</span> <span class="o">~/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">refind</span><span class="o">-</span><span class="n">bin</span><span class="o">-</span><span class="mf">0.6.7</span>  
+ <span class="p">.</span><span class="o">/</span><span class="n">install</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+
+
+<h1>4. Install Ubuntu</h1>
+<p>Here comes the fun part.  Insert your Ubuntu USB installer and restart
+your computer.  When the computer restarts, you should see your new boot
+manager screen with an Apple and a triangle shaped icon for the Ubuntu
+installer.  Right arrow over to the installer and hit Enter to select
+it.  This will load the typical Ubuntu installer.  Select "Install
+Ubuntu".  If this is the first time you are installing Ubuntu, it should
+give you the option to install Ubuntu alongside Mac OSX.  If you are
+reinstalling over a bad installation, it will give you the option to
+erase Ubuntu only and reinstall.  <strong>WARNING!</strong> If you are attempting a
+reinstall and select this option, the previous swap partition will not
+be reused or erased.  A new one will be created meaning you will lose
+about 8GBs of space for nothing.  Instead of having the installer create
+the partitions for you, initial install or reinstall, I recommend
+selecting the "Something else" option and create your own partitions. If
+you select "Something else" you will see a screen with a list of
+partitions.  If this is a reinstall, scroll to the bottom of the list
+and delete the previous install's paritions.  At the very bottom of the
+list is "Free space".  Select that and click on the "+" sign to create a
+new partition.  You can create a root "/" using ext4 with a size of
+about 25GB.  Next, create a swap partition with a size around 8 to 16GB.
+ Finally, create an ext4 home "/home" partition with the rest of the
+remaining space and continue with the installation.  After the
+installation, it will ask you to reboot and you should do so.  If you
+get a blank screen after the message, just hit the space bar and it will
+continue.</p>
+<h1>5. Setting Up WIFI</h1>
+<p>After you restart, you should see a Ubuntu logo, an Apple logo and the
+Linux penguin.  You may also see the diamond shaped logo if your USB
+stick is still plugged in.  If you didn't have a 2nd USB stick, you will
+need to get the wifi drivers.  Select the Apple logo to boot into Mac
+OS, format the USB installer so it can be read and copy the drivers from
+the links above onto the USB stick.  Reboot. When you have your wifi
+drivers, select the penguin logo.  You should see the normal GRUB menu
+on the left hand side.  Go ahead and select the first option, "Ubuntu"
+and continue to log in and admire your beautiful Ubuntu installation.
+ You can change the resolution by clicking on the Dash and selecting
+"Displays" to make things easier to read. Insert your USB stick with
+your wifi drivers if you haven't already done so and open a Terminal.
+Change to the directory of the USB stick and install each of the 3
+dependencies first and then the wifi driver last.</p>
+<div class="highlight"><pre><span class="n">cd</span> <span class="o">/</span><span class="n">media</span><span class="o">/</span><span class="p">[</span><span class="n">USERNAME</span><span class="p">]</span><span class="o">/</span><span class="p">[</span><span class="n">USB</span> <span class="n">DRIVE</span><span class="p">]</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span>  <span class="n">dkms</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">bcmwl</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span>
+</pre></div>
+
+
+<p>You should now have wifi access.  Woohoo! From here on out, everything
+should be working.  I haven't encountered any problems and I found 14.04
+to be very fast and smooth.</p>
+            </div>
+            <!-- /.entry-content -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'alexvictorchan'; // required: replace example with your forum shortname
+
+                    var disqus_identifier = 'ubuntu-14-04-on-13-macbook-pro';
+                var disqus_url = '../../../../2014/04/23/ubuntu-14-04-on-13-macbook-pro/';
+
+            var disqus_config = function () {
+                this.language = "en";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="http://twitter.com/alexvictorchan"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
+                    <li class="list-group-item"><a href="http://github.com/alexchan"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                  </ul>
+                </li>
+
+
+
+                <li class="list-group-item"><a href="../../../../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group " id="tags">
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.careermatchme.com" target="_blank">
+                Career Match Me
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Alex Victor Chan
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../../../../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../../../../theme/js/respond.min.js"></script>
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'alexvictorchan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-37579240-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+</body>
+</html>

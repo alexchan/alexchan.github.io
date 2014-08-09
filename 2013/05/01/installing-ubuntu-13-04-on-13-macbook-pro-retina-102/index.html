@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Installing Ubuntu 13.04 on 13" Macbook Pro Retina (10,2) - Alex Victor Chan</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="../../../../2013/05/01/installing-ubuntu-13-04-on-13-macbook-pro-retina-102/">
+
+        <meta name="author" content="alex" />
+        <meta name="description" content="A couple of weeks ago, I purchased the 13&#34; Macbook Pro Retina. I spent a long time thinking about the purchase because I wanted something that would work well with Ubuntu and had at least 1080p and 8GB RAM. Since I&#39;ve bought it, I gave OSX a try in ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../../../../theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="../../../../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../../../../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../theme/css/style.css" type="text/css"/>
+
+        <link href="../../../../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Alex Victor Chan ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../../../../" class="navbar-brand">
+Alex Victor Chan            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="../../../../pages/about.html">
+                             About
+                          </a></li>
+                        <li class="active">
+                            <a href="../../../../category/technology.html">Technology</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../../../../archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="../../../../2013/05/01/installing-ubuntu-13-04-on-13-macbook-pro-retina-102/"
+                       rel="bookmark"
+                       title="Permalink to Installing Ubuntu 13.04 on 13" Macbook Pro Retina (10,2)">
+                        Installing Ubuntu 13.04 on 13" Macbook Pro Retina (10,2)
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2013-05-01T18:08:00"> Wed 01 May 2013</time>
+    </span>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>A couple of weeks ago, I purchased the 13" Macbook Pro Retina. I spent a
+long time thinking about the purchase because I wanted something that
+would work well with Ubuntu and had at least 1080p and 8GB RAM. Since
+I've bought it, I gave OSX a try in the hopes that it will be usable for
+development since I'm almost exclusively on Ubuntu for the last several
+years. I think it's definitely usable but it's hard to change old habits
+so I installed Ubuntu on the Macbook. The following is my process, my
+mistakes and what I've learned.</p>
+<h1><span style="line-height: 24px;">1. Partition</span></h1>
+<p>The first step is pretty simple.  You can resize the Macintosh partition
+using the OSX Disk Utility.  I resized the partition to 88GB and left
+the rest as free space.</p>
+<h1>2. Create USB Installer</h1>
+<p>You should follow the
+directions <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx</a> to
+create a 64-bit Ubuntu USB startup drive.<br />
+At the end of the instructions, you'll see an error message indicating
+that OSX isn't able to read the drive.</p>
+<p><a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM.png"><img alt="Screen-Shot-2013-10-30-at-9.20.37-PM" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-300x118.png" /></a><br />
+Don't worry, this is normal and it should still work as a USB installer
+but you just won't be able to read/write to the drive itself.</p>
+<p>(OPTIONAL but RECOMMENDED) Since you won't be able to read/write to this
+drive, if you have another USB stick handy, you should upload the <a href="http://packages.ubuntu.com/raring/bcmwl-kernel-source" title="wifi driver">wifi
+driver</a>
+to the 2nd USB stick.  After the Ubuntu installation, wifi will not work
+and you will need to install the driver and its 3 dependencies to get it
+working.</p>
+<h1>3. Install Boot Manager</h1>
+<p>I used rEFInd as the boot manager instead of rEFIt.  It seems to work
+for me.  You can find it
+here: <a href="http://www.rodsbooks.com/refind/getting.html">http://www.rodsbooks.com/refind/getting.html</a> and download the
+binary zip file.  Once downloaded and unzipped, open a Terminal window
+and install:</p>
+<div class="highlight"><pre><span class="n">cd</span> <span class="o">~/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">refind</span><span class="o">-</span><span class="n">bin</span><span class="o">-</span><span class="mf">0.6.7</span>  
+ <span class="p">.</span><span class="o">/</span><span class="n">install</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+
+
+<h1>4. Install Ubuntu</h1>
+<p>Here comes the fun part.  Insert your Ubuntu USB installer and restart
+your computer.  When the computer restarts, you should see your new boot
+manager screen with an Apple and a triangle shaped icon for the Ubuntu
+installer.  Right arrow over to the installer and hit Enter to select
+it.  This will load the typical Ubuntu installer.  Select "Install
+Ubuntu".  If this is the first time you are installing Ubuntu, it should
+give you the option to install Ubuntu alongside Mac OSX.  If you are
+reinstalling over a bad installation, it will give you the option to
+erase Ubuntu only and reinstall.  <strong>WARNING!</strong> If you are attempting a
+reinstall and select this option, the previous swap partition will not
+be reused or erased.  A new one will be created meaning you will lose
+about 8GBs of space for nothing.  Instead of having the installer create
+the partitions for you, initial install or reinstall, I recommend
+selecting the "Something else" option and create your own partitions.</p>
+<p>If you select "Something else" you will see a screen with a list of
+partitions.  If this is a reinstall, scroll to the bottom of the list
+and delete the previous install's paritions.  At the very bottom of the
+list is "Free space".  Select that and click on the "+" sign to create a
+new partition.  You can create a root "/" using ext4 with a size of
+about 25GB.  Next, create a swap partition with a size around 8 to 16GB.
+ Finally, create an ext4 home "/home" partition with the rest of the
+remaining space and continue with the installation.  After the
+installation, it will ask you to reboot and you should do so.  If you
+get a blank screen after the message, just hit the space bar and it will
+continue.</p>
+<h1>5. Setting Up WIFI</h1>
+<p>After you restart, you should see a Ubuntu logo, an Apple logo and the
+Linux penguin.  You may also see the diamond shaped logo if your USB
+stick is still plugged in.  If you didn't have a 2nd USB stick, you will
+need to get the wifi drivers.  Select the Apple logo to boot into Mac
+OS, format the USB installer so it can be read and copy the drivers from
+the link above onto the USB stick.  Reboot.</p>
+<p>When you have your wifi drivers, select the penguin, <strong>NOT</strong> the Ubuntu
+logo.  If you select the Ubuntu logo, I think it will go to the grub
+rescue screen and I had to hold down the power button to reboot again.
+ After selecting the penguin, you should see the normal GRUB menu on the
+left hand side.  Go ahead and select the first option, "Ubuntu" and
+continue to log in and admire your beautiful Ubuntu installation.  You
+can change the resolution by clicking on the Dash and selecting
+"Displays" to make things easier to read.</p>
+<p>Insert your USB stick with your wifi drivers if you haven't already done
+so and open a Terminal. Change to the directory of the USB stick and
+install each of the 3 dependencies first and then the wifi driver last.</p>
+<div class="highlight"><pre><span class="n">cd</span> <span class="o">/</span><span class="n">media</span><span class="o">/</span><span class="p">[</span><span class="n">USERNAME</span><span class="p">]</span><span class="o">/</span><span class="p">[</span><span class="n">USB</span> <span class="n">DRIVE</span><span class="p">]</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span>  <span class="n">dkms</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">libc6</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">linux</span><span class="o">-</span><span class="n">lib</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span>
+<span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">bcmwl</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span>
+</pre></div>
+
+
+<p>You should now have wifi access.  Woohoo!</p>
+<h1>6. Repair EFI Boot Manager</h1>
+<p>I needed to do this so that I could load Ubuntu's 64 bit EFI boot
+manager.  In the terminal, enter the following commands:</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="o">:</span><span class="n">yannubuntu</span><span class="o">/</span><span class="n">boot</span><span class="o">-</span><span class="n">repair</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">boot</span><span class="o">-</span><span class="n">repair</span> <span class="o">&amp;&amp;</span> <span class="n">boot</span><span class="o">-</span><span class="n">repair</span>
+</pre></div>
+
+
+<p>When the popup appears, click on "Advanced options" and go to the "GRUB
+location" tab.  Check the box next to the option "Separate /boot/efi
+partition" and click on "Apply".  You will be presented with a series of
+commands to enter into the Terminal.  Follow the instructions.  I ran
+into a dependency error on the last command I was presented with related
+to efi-amd64.  Go ahead and continue forward anyway and you will get the
+message that boot repair was successful.  Just for peace of mind, I ran
+the boot-repair command again but was not presented with the commands to
+enter and the final message indicated the repair was successful.  If
+someone understands this section better than I, please let me know.
+ <strong>After rebooting, you should now select the Ubuntu icon and not the
+penguin icon.</strong></p>
+<h1>7. Fix Sound Setting</h1>
+<p>The last thing I had to fix was the sound setting.  Fortunately it was
+extremely easy.  Edit the file: /etc/modprobe.d/alsa-base.conf and add
+the following line to the bottom.</p>
+<div class="highlight"><pre><span class="n">options</span> <span class="n">snd</span><span class="o">-</span><span class="n">hda</span><span class="o">-</span><span class="n">intel</span> <span class="n">model</span><span class="o">=</span><span class="n">mbp101</span>
+</pre></div>
+
+
+<h1>8. Additional Notes</h1>
+<p>At this point, you should be good to go. Everything else seems to be
+working well and it's customizations from this point.  One important
+note, <strong>DO NOT INSTALL NVIDIA DRIVERS</strong>.  This will screw up your
+installation and you will not be able to boot back in.  Also, do not
+install laptop-mode-tools as that will also prevent you from logging
+back in.  In the event you do and you need to recover, boot from your
+USB startup drive and select "Try Ubuntu".  Open a terminal and enter
+the following commands while replacing "/dev/sda4" with your root
+partition. The "Disks" utility can help you find out what that is.</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">mount</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda4</span> <span class="o">/</span><span class="n">mnt</span>
+<span class="n">sudo</span> <span class="n">chroot</span> <span class="o">/</span><span class="n">mnt</span>
+</pre></div>
+
+
+<p>You will now be able to do things as if you're already logged in such
+as:</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">purge</span> <span class="n">laptop</span><span class="o">-</span><span class="n">mode</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+
+
+<h3>Boot loaders</h3>
+<p>I don't like seeing the Microsoft logo as an option.  I removed the
+Microsoft directory from /boot/efi/EFI.  You can move it somewhere else
+in case you want to put it back.</p>
+<p>I like fast boot times.  If you log into the Mac OSX side and edit
+/boot/refind/refind.conf, you can reduce the timeout to a few seconds so
+that it will automatically load Ubuntu faster.  Also, on the GRUB side,
+you can edit /etc/default/grub and reduce the timeout value there as
+well.</p>
+<p>I hope this helps someone save time instead of trying to figure it all
+out.  I'd definitely like to hear from anyone if this helps them and if
+there are any problems, please let me know!</p>
+<h1>9. References</h1>
+<p><a href="http://randomtutor.blogspot.com/2013/02/installing-ubuntu-1304-on-retina.html">http://randomtutor.blogspot.com/2013/02/installing-ubuntu-1304-on-retina.html</a></p>
+<p><a href="http://cberner.com/2013/03/01/installing-ubuntu-13-04-on-macbook-pro-retina/">http://cberner.com/2013/03/01/installing-ubuntu-13-04-on-macbook-pro-retina/</a></p>
+<p><a href="http://commandline.org.uk/2013/03/08/lubuntu_on_macbook_pro_retina.html">http://commandline.org.uk/2013/03/08/lubuntu_on_macbook_pro_retina.html</a></p>
+            </div>
+            <!-- /.entry-content -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'alexvictorchan'; // required: replace example with your forum shortname
+
+                    var disqus_identifier = 'installing-ubuntu-13-04-on-13-macbook-pro-retina-102';
+                var disqus_url = '../../../../2013/05/01/installing-ubuntu-13-04-on-13-macbook-pro-retina-102/';
+
+            var disqus_config = function () {
+                this.language = "en";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="http://twitter.com/alexvictorchan"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
+                    <li class="list-group-item"><a href="http://github.com/alexchan"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                  </ul>
+                </li>
+
+
+
+                <li class="list-group-item"><a href="../../../../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group " id="tags">
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.careermatchme.com" target="_blank">
+                Career Match Me
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Alex Victor Chan
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../../../../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../../../../theme/js/respond.min.js"></script>
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'alexvictorchan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-37579240-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+</body>
+</html>
