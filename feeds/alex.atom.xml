@@ -5,14 +5,14 @@ release of 14.04, I decided to try it out on my 13" Macbook Pro Retina.&lt;/p&gt
 &lt;p&gt;The first step is pretty simple.  You can resize the Macintosh partition
 using the OSX Disk Utility.  I resized the OSX partition to 152GB and
 left the rest as free space.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png"&gt;&lt;img alt="" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Mac OSX Partition" src="/images/Screen-Shot-2014-04-21-at-1.15.26-PM-280x247.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;2. Create USB Installer&lt;/h1&gt;
 &lt;p&gt;You should follow the
 directions &lt;a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx"&gt;http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx&lt;/a&gt; to
 create a 64-bit Ubuntu USB startup drive. At the end of the
 instructions, you'll see an error message indicating that OSX isn't able
-to read the drive.
-&lt;a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261.png"&gt;&lt;img alt="" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261-300x118.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+to read the drive.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The disk you inserted was not readable by this computer" src="/images/Screen-Shot-2013-10-30-at-9.20.37-PM-660x261-300x118.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Don't worry, this is normal and it should still work as a USB installer
 but you just won't be able to read/write to the drive itself. (OPTIONAL
 but RECOMMENDED) Since you won't be able to read/write to this drive, if
@@ -201,7 +201,7 @@ directions &lt;a href="http://www.ubuntu.com/download/desktop/create-a-usb-stic
 create a 64-bit Ubuntu USB startup drive.&lt;br /&gt;
 At the end of the instructions, you'll see an error message indicating
 that OSX isn't able to read the drive.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM.png"&gt;&lt;img alt="Screen-Shot-2013-10-30-at-9.20.37-PM" src="http://www.alexvictorchan.com/wp-content/uploads/2014/07/Screen-Shot-2013-10-30-at-9.20.37-PM-300x118.png" /&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a href="/images/Screen-Shot-2013-10-30-at-9.20.37-PM.png"&gt;&lt;img alt="Screen-Shot-2013-10-30-at-9.20.37-PM" src="/images/Screen-Shot-2013-10-30-at-9.20.37-PM-300x118.png" /&gt;&lt;/a&gt;&lt;br /&gt;
 Don't worry, this is normal and it should still work as a USB installer
 but you just won't be able to read/write to the drive itself.&lt;/p&gt;
 &lt;p&gt;(OPTIONAL but RECOMMENDED) Since you won't be able to read/write to this
