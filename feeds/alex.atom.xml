@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Victor Chan</title><link href="http://www.alexvictorchan.com/" rel="alternate"></link><link href="http://www.alexvictorchan.com/feeds/alex.atom.xml" rel="self"></link><id>http://www.alexvictorchan.com/</id><updated>2014-04-23T19:37:00-07:00</updated><entry><title>Ubuntu 14.04 on 13" Macbook Pro</title><link href="http://www.alexvictorchan.com/2014/04/23/ubuntu-14-04-on-13-macbook-pro/" rel="alternate"></link><updated>2014-04-23T19:37:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-04-23:2014/04/23/ubuntu-14-04-on-13-macbook-pro/</id><summary type="html">&lt;p&gt;I love Ubuntu, especially as a development environment.  Since the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Victor Chan</title><link href="http://www.alexvictorchan.com/" rel="alternate"></link><link href="http://www.alexvictorchan.com/feeds/alex.atom.xml" rel="self"></link><id>http://www.alexvictorchan.com/</id><updated>2014-08-12T09:33:00-07:00</updated><entry><title>Task Queue Routing in App Engine</title><link href="http://www.alexvictorchan.com/2014/08/12/task-queue-routing-in-app-engine/" rel="alternate"></link><updated>2014-08-12T09:33:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-08-12:2014/08/12/task-queue-routing-in-app-engine/</id><summary type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;When working with App Engine's task queues, it may be confusing to understand where and how a
+particular task is being executed.  If working with different versions and modules, things can
+get confusing fast.  Fortunately task queue processing is fairly simple if you keep a few things
+in mind.  There are two main components with using task queues; the queuing of the task with
+arguments and the execution of the task.  In general, this article will focus primarily on push queues.&lt;/p&gt;
+&lt;h2&gt;Enqueue Task&lt;/h2&gt;
+&lt;p&gt;Push-tasks are queued by using the taskqueue.add() function or by creating a Task object and
+calling its add function.  A push task almost has the same properties as a request object with some
+additional routing information.  When you enqueue a task, you define all the parameters of 
+the task such headers, payload, method, url and params; properties you would find in a request object.
+In addition, you can also specify other properties such as eta, countdown and whether the task is transactional. 
+For routing, you can specify a task target when calling the .add() function.  This parameter
+will be prepended to the hostname when the task is created.  For example: if your
+application name is "my-app" and you specify a target value of "my-version", the url that will be
+used to execute the task will be:&lt;/p&gt;
+&lt;p&gt;http://my-version.my-app.appspot.com&lt;/p&gt;
+&lt;p&gt;To target a specifc version of a module, you would set a target value of "my-version.my-module" and
+the url that will be used in the task will end up being:&lt;/p&gt;
+&lt;p&gt;http://my-version.my-module.my-app.appspot.com&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Please keep in mind that if you are queuing a task defined in queue.yaml and the named queue in
+ queue.yaml is configured with a target property, your specified target value when you make the
+ .add() function call will be ignored.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Task Execution&lt;/h2&gt;
+&lt;p&gt;The key thing to remember about tasks in push queues are that they are simply requests to your
+application's task endpoint.  This means that they must follow the same rules as any other request
+including abiding by dispatch.yaml routing rules and instance.version.module hostname conventions.&lt;/p&gt;
+&lt;p&gt;If a target is not specifed when a task is added to a queue, the task will be executed in the same
+module/version where the task was enqueued unless it becomes rerouted by queue.yaml or dispatch.yaml.&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;For additional information and details, please check out the link below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://developers.google.com/appengine/docs/python/taskqueue/"&gt;https://developers.google.com/appengine/docs/python/taskqueue/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.google.com/appengine/docs/python/modules/routing"&gt;https://developers.google.com/appengine/docs/python/modules/routing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Ubuntu 14.04 on 13" Macbook Pro</title><link href="http://www.alexvictorchan.com/2014/04/23/ubuntu-14-04-on-13-macbook-pro/" rel="alternate"></link><updated>2014-04-23T19:37:00-07:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-04-23:2014/04/23/ubuntu-14-04-on-13-macbook-pro/</id><summary type="html">&lt;p&gt;I love Ubuntu, especially as a development environment.  Since the
 release of 14.04, I decided to try it out on my 13" Macbook Pro Retina.&lt;/p&gt;
 &lt;h1&gt;&lt;span style="color: #555555; font-family: 'Bree Serif', Georgia, serif; font-size: 24px; line-height: 1.5;"&gt;1. Partition&lt;/span&gt;&lt;/h1&gt;
 &lt;p&gt;The first step is pretty simple.  You can resize the Macintosh partition
