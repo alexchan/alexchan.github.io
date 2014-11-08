@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alex Victor Chan</title><link>http://www.alexvictorchan.com/</link><description></description><atom:link href="http://www.alexvictorchan.com/feeds/alex.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 12 Aug 2014 09:33:00 -0700</lastBuildDate><item><title>Task Queue Routing in App Engine</title><link>http://www.alexvictorchan.com/2014/08/12/task-queue-routing-in-app-engine/</link><description>&lt;h2&gt;Introduction&lt;/h2&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alex Victor Chan</title><link>http://www.alexvictorchan.com/</link><description></description><atom:link href="http://www.alexvictorchan.com/feeds/alex.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 06 Nov 2014 08:00:00 -0800</lastBuildDate><item><title>Layout Structure for a Go Web Project</title><link>http://www.alexvictorchan.com/2014/11/06/go-project-structure/</link><description>&lt;p&gt;I wanted to create my first Go web application on App Engine but wasn't sure 
+how to structure my project.&lt;/p&gt;
+&lt;p&gt;The first step in laying out my project involved reading the following articles:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://golang.org/doc/code.html"&gt;How to Write Go Code&lt;/a&gt;&lt;br /&gt;
+&lt;a href="https://cloud.google.com/appengine/docs/go/gettingstarted/devenvironment"&gt;App Engine Go Dev Environment&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I wanted to follow the guidelines as described in the "How to Write Go Code" document
+but also create my project in a way that would be easy to build a web application
+that can be deployed on App Engine.  I decided to split my website into two git
+repositories.&lt;/p&gt;
+&lt;p&gt;The first repo would be the website itself and all associated code.  This 
+app is responsible for handling requests and saving data to the datastore. 
+The second repository would contain my business logic that would be used
+for the website as a library.  The reason for separating the business 
+logic is that the library may be used in other applications, other than a 
+web app.&lt;/p&gt;
+&lt;p&gt;I eventually ended up with the following project structure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;projects&lt;/span&gt;
+    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;bin&lt;/span&gt;
+    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;
+    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;
+        &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+            &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;alexchan&lt;/span&gt;
+                &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;careermatchme&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;web&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yaml&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;css&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;js&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;templates&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="mf"&gt;404.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="mf"&gt;500.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;jobsearch&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;includes&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;                 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;│  &lt;/span&gt;                 &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+                &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;jobs&lt;/span&gt;
+                    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;jobs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;
+                    &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;jobs_test&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The top-level directory, projects, is where my Go workspace and is where my GOPATH environment 
+variable is set to. My two repositories are under github.com/alexchan/careermatchme and 
+github.com/alexchan/jobs. This allowed me to follow to conventions of described in the first 
+article while setting up my environment to also develop and deploy for App Engine.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">alex</dc:creator><pubDate>Thu, 06 Nov 2014 08:00:00 -0800</pubDate><guid>tag:www.alexvictorchan.com,2014-11-06:2014/11/06/go-project-structure/</guid><category>golang</category><category>go</category><category>appengine</category><category>project</category><category>structure</category><category>layout</category></item><item><title>Task Queue Routing in App Engine</title><link>http://www.alexvictorchan.com/2014/08/12/task-queue-routing-in-app-engine/</link><description>&lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;When working with App Engine's task queues, it may be confusing to understand where and how a
 particular task is being executed.  If working with different versions and modules, things can
 get confusing fast.  Fortunately task queue processing is fairly simple if you keep a few things
