@@ -127,35 +127,35 @@ for the website as a library.  The reason for separating the business
 logic is that the library may be used in other applications, other than a 
 web app.</p>
 <p>I eventually ended up with the following project structure:</p>
-<div class="highlight"><pre><span class="err">├──</span> <span class="n">projects</span>
-    <span class="err">├──</span> <span class="n">bin</span>
-    <span class="err">├──</span> <span class="n">pkg</span>
-    <span class="err">├──</span> <span class="n">src</span>
-        <span class="err">├──</span> <span class="n">github</span><span class="p">.</span><span class="n">com</span>
-            <span class="err">├──</span> <span class="n">alexchan</span>
-                <span class="err">├──</span> <span class="n">careermatchme</span>
-                <span class="err">│  </span> <span class="err">├──</span> <span class="n">setup</span><span class="p">.</span><span class="n">txt</span>
-                <span class="err">│  </span> <span class="err">└──</span> <span class="n">web</span>
-                <span class="err">│  </span>     <span class="err">├──</span> <span class="n">app</span><span class="p">.</span><span class="n">go</span>
-                <span class="err">│  </span>     <span class="err">├──</span> <span class="n">app</span><span class="p">.</span><span class="n">yaml</span>
-                <span class="err">│  </span>     <span class="err">├──</span> <span class="k">static</span>
-                <span class="err">│  </span>     <span class="err">│  </span> <span class="err">├──</span> <span class="n">css</span>
-                <span class="err">│  </span>     <span class="err">│  </span> <span class="err">├──</span> <span class="n">img</span>
-                <span class="err">│  </span>     <span class="err">│  </span> <span class="err">└──</span> <span class="n">js</span>
-                <span class="err">│  </span>     <span class="err">└──</span> <span class="n">templates</span>
-                <span class="err">│  </span>         <span class="err">├──</span> <span class="mf">404.</span><span class="n">html</span>
-                <span class="err">│  </span>         <span class="err">├──</span> <span class="mf">500.</span><span class="n">html</span>
-                <span class="err">│  </span>         <span class="err">├──</span> <span class="n">base</span><span class="p">.</span><span class="n">html</span>
-                <span class="err">│  </span>         <span class="err">└──</span> <span class="n">jobsearch</span>
-                <span class="err">│  </span>             <span class="err">├──</span> <span class="n">about</span><span class="p">.</span><span class="n">html</span>
-                <span class="err">│  </span>             <span class="err">├──</span> <span class="n">includes</span>
-                <span class="err">│  </span>             <span class="err">│  </span> <span class="err">├──</span> <span class="n">pagination</span><span class="p">.</span><span class="n">html</span>
-                <span class="err">│  </span>             <span class="err">└──</span> <span class="n">search</span>
-                <span class="err">│  </span>                 <span class="err">├──</span> <span class="n">form</span><span class="p">.</span><span class="n">html</span>
-                <span class="err">│  </span>                 <span class="err">└──</span> <span class="n">results</span><span class="p">.</span><span class="n">html</span>
-                <span class="err">└──</span> <span class="n">jobs</span>
-                    <span class="err">├──</span> <span class="n">jobs</span><span class="p">.</span><span class="n">go</span>
-                    <span class="err">└──</span> <span class="n">jobs_test</span><span class="p">.</span><span class="n">go</span>
+<div class="highlight"><pre>├── projects
+    ├── bin
+    ├── pkg
+    ├── src
+        ├── github.com
+            ├── alexchan
+                ├── careermatchme
+                │   ├── setup.txt
+                │   └── web
+                │       ├── app.go
+                │       ├── app.yaml
+                │       ├── static
+                │       │   ├── css
+                │       │   ├── img
+                │       │   └── js
+                │       └── templates
+                │           ├── 404.html
+                │           ├── 500.html
+                │           ├── base.html
+                │           └── jobsearch
+                │               ├── about.html
+                │               ├── includes
+                │               │   ├── pagination.html
+                │               └── search
+                │                   ├── form.html
+                │                   └── results.html
+                └── jobs
+                    ├── jobs.go
+                    └── jobs_test.go
 </pre></div>
 
 
@@ -257,13 +257,13 @@ article while setting up my environment to also develop and deploy for App Engin
                 <li class="list-group-item"><a href="http://www.alexvictorchan.com/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                     <ul class="list-group " id="tags">
                         <li class="list-group-item tag-4">
-                            <a href="http://www.alexvictorchan.com/tag/appengine.html">
-                                appengine
+                            <a href="http://www.alexvictorchan.com/tag/project.html">
+                                project
                             </a>
                         </li>
                         <li class="list-group-item tag-4">
-                            <a href="http://www.alexvictorchan.com/tag/go.html">
-                                go
+                            <a href="http://www.alexvictorchan.com/tag/appengine.html">
+                                appengine
                             </a>
                         </li>
                         <li class="list-group-item tag-4">
@@ -272,18 +272,18 @@ article while setting up my environment to also develop and deploy for App Engin
                             </a>
                         </li>
                         <li class="list-group-item tag-4">
-                            <a href="http://www.alexvictorchan.com/tag/golang.html">
-                                golang
-                            </a>
-                        </li>
-                        <li class="list-group-item tag-4">
-                            <a href="http://www.alexvictorchan.com/tag/project.html">
-                                project
-                            </a>
-                        </li>
-                        <li class="list-group-item tag-4">
                             <a href="http://www.alexvictorchan.com/tag/structure.html">
                                 structure
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="http://www.alexvictorchan.com/tag/go.html">
+                                go
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="http://www.alexvictorchan.com/tag/golang.html">
+                                golang
                             </a>
                         </li>
                     </ul>

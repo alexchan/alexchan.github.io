@@ -15,35 +15,35 @@ for the website as a library.  The reason for separating the business
 logic is that the library may be used in other applications, other than a 
 web app.&lt;/p&gt;
 &lt;p&gt;I eventually ended up with the following project structure:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;projects&lt;/span&gt;
-    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;bin&lt;/span&gt;
-    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;
-    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;
-        &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
-            &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;alexchan&lt;/span&gt;
-                &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;careermatchme&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;web&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yaml&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;css&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;js&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;     &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;templates&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="mf"&gt;404.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="mf"&gt;500.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;         &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;jobsearch&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;includes&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;│  &lt;/span&gt; &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;             &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;                 &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;│  &lt;/span&gt;                 &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-                &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;jobs&lt;/span&gt;
-                    &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;jobs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;
-                    &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;jobs_test&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;go&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;├── projects
+    ├── bin
+    ├── pkg
+    ├── src
+        ├── github.com
+            ├── alexchan
+                ├── careermatchme
+                │   ├── setup.txt
+                │   └── web
+                │       ├── app.go
+                │       ├── app.yaml
+                │       ├── static
+                │       │   ├── css
+                │       │   ├── img
+                │       │   └── js
+                │       └── templates
+                │           ├── 404.html
+                │           ├── 500.html
+                │           ├── base.html
+                │           └── jobsearch
+                │               ├── about.html
+                │               ├── includes
+                │               │   ├── pagination.html
+                │               └── search
+                │                   ├── form.html
+                │                   └── results.html
+                └── jobs
+                    ├── jobs.go
+                    └── jobs_test.go
 &lt;/pre&gt;&lt;/div&gt;
 
 
