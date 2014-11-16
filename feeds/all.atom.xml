@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Victor Chan</title><link href="http://www.alexvictorchan.com/" rel="alternate"></link><link href="http://www.alexvictorchan.com/feeds/all.atom.xml" rel="self"></link><id>http://www.alexvictorchan.com/</id><updated>2014-11-06T08:00:00-08:00</updated><entry><title>Layout Structure for a Go Web Project</title><link href="http://www.alexvictorchan.com/2014/11/06/go-project-structure/" rel="alternate"></link><updated>2014-11-06T08:00:00-08:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-11-06:2014/11/06/go-project-structure/</id><summary type="html">&lt;p&gt;I wanted to create my first Go web application on App Engine but wasn't sure 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Victor Chan</title><link href="http://www.alexvictorchan.com/" rel="alternate"></link><link href="http://www.alexvictorchan.com/feeds/all.atom.xml" rel="self"></link><id>http://www.alexvictorchan.com/</id><updated>2014-11-14T08:00:00-08:00</updated><entry><title>Routing for a Go Web Project</title><link href="http://www.alexvictorchan.com/2014/11/14/go-routing/" rel="alternate"></link><updated>2014-11-14T08:00:00-08:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-11-14:2014/11/14/go-routing/</id><summary type="html">&lt;p&gt;From a python programmer's perspective, these are lessons I've learned from developing a web app using Go.&lt;/p&gt;
+&lt;p&gt;After I've planned my &lt;a href="http://www.alexvictorchan.com/2014/11/06/go-project-structure/"&gt;project structure&lt;/a&gt; for my go app, I started to look into 
+how I should go about developing the app itself.  I read the detailed tutorial from the &lt;a href="https://golang.org/doc/articles/wiki/"&gt;golang wiki&lt;/a&gt; 
+wiki site.  Although it seemed simple enough to build a web app, I immediately recognized some things 
+I would miss from the python/django world.  For example, I didn't want to have code in my view to parse and validate 
+the URLs.  I started to look around for a solution and came across Gorilla Toolkit, specifically the &lt;a href="http://www.gorillatoolkit.org/pkg/mux"&gt;mux package&lt;/a&gt;. 
+It provided functionality that I was more accustomed to when I was using Django.&lt;/p&gt;
+&lt;p&gt;In the case of capturing values from the URL or applying a regex to the URL, you would specify routes as:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;NewRouter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/products/{key}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;ProductHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/articles/{category}/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;ArticlesCategoryHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/articles/{category}/{id:[0-9]+}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;ArticleHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In the ArticleHandler function, you can retreive the value of "category" or "id" by:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Vars&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nx"&gt;category&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nx"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;category&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nx"&gt;id&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nx"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can also restrict access to a view handler by specifying the request to use a specific method:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Methods&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or requiring the request to use specific headers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Headers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;X-Requested-With&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;XMLHttpRequest&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can view the &lt;a href="http://www.gorillatoolkit.org/pkg/mux"&gt;mux&lt;/a&gt; documentation all the functionality available. 
+In general, this package helps remove a lot of boilerplate code from the view functions and makes a Django developer 
+feel more at home when building a go web app.&lt;/p&gt;</summary><category term="golang"></category><category term="go"></category><category term="routing"></category></entry><entry><title>Layout Structure for a Go Web Project</title><link href="http://www.alexvictorchan.com/2014/11/06/go-project-structure/" rel="alternate"></link><updated>2014-11-06T08:00:00-08:00</updated><author><name>alex</name></author><id>tag:www.alexvictorchan.com,2014-11-06:2014/11/06/go-project-structure/</id><summary type="html">&lt;p&gt;I wanted to create my first Go web application on App Engine but wasn't sure 
 how to structure my project.&lt;/p&gt;
 &lt;p&gt;The first step in laying out my project involved reading the following articles:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://golang.org/doc/code.html"&gt;How to Write Go Code&lt;/a&gt;&lt;br /&gt;
