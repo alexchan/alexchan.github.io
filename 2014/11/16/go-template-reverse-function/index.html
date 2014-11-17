@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>How To Configure Postfix for SES - Alex Victor Chan</title>
+    <title>Reverse Function in Go Template - Alex Victor Chan</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,10 +10,11 @@
 
 
 
-<link rel="canonical" href="http://www.alexvictorchan.com/2013/03/05/how-to-configure-postfix-for-ses/">
+<link rel="canonical" href="http://www.alexvictorchan.com/2014/11/16/go-template-reverse-function/">
 
         <meta name="author" content="alex" />
-        <meta name="description" content="I&#39;ve recently set up my own email server. I&#39;ve read several tutorials on how to install and configure Postfix and IMAP. One thing that I noticed is that if you send email from a server without a good reputation, there&#39;s a high probability it will end up ..." />
+        <meta name="keywords" content="golang,go,routing,template,reverse" />
+        <meta name="description" content="From a python programmer&#39;s perspective, these are lessons I&#39;ve learned from developing a web app using the Go programming language. After understanding how to structure a go web app and route requests to a view handler, the next logical step was to use a template to render an ..." />
 
 
 
@@ -77,10 +78,10 @@ Alex Victor Chan            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://www.alexvictorchan.com/2013/03/05/how-to-configure-postfix-for-ses/"
+                    <a href="http://www.alexvictorchan.com/2014/11/16/go-template-reverse-function/"
                        rel="bookmark"
-                       title="Permalink to How To Configure Postfix for SES">
-                        How To Configure Postfix for SES
+                       title="Permalink to Reverse Function in Go Template">
+                        Reverse Function in Go Template
                     </a>
                 </h1>
             </header>
@@ -90,76 +91,106 @@ Alex Victor Chan            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2013-03-05T17:49:00-08:00"> Tue 05 March 2013</time>
+        <i class="fa fa-calendar"></i><time datetime="2014-11-16T08:00:00-08:00"> Sun 16 November 2014</time>
     </span>
 
 
 
+<span class="label label-default">Tags</span>
+	<a href="http://www.alexvictorchan.com/tag/golang.html">golang</a>
+        /
+	<a href="http://www.alexvictorchan.com/tag/go.html">go</a>
+        /
+	<a href="http://www.alexvictorchan.com/tag/routing.html">routing</a>
+        /
+	<a href="http://www.alexvictorchan.com/tag/template.html">template</a>
+        /
+	<a href="http://www.alexvictorchan.com/tag/reverse.html">reverse</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>I've recently set up my own email server.  I've read several tutorials
-on how to install and configure Postfix and IMAP.  One thing that I
-noticed is that if you send email from a server without a good
-reputation, there's a high probability it will end up in the Spam/Junk
-folder or worse, not even get delivered.  I decided to leverage SES as
-my SMTP server instead of letting my local installation of Postfix do
-all the work.</p>
-<p>Install stunnel:</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">stunnel</span>
+                <p>From a python programmer's perspective, these are lessons I've learned from developing a web app using the Go 
+programming language.</p>
+<p>After understanding how to <a href="http://www.alexvictorchan.com/2014/11/06/go-project-structure/">structure</a> a go 
+web app and <a href="http://www.alexvictorchan.com/2014/11/14/go-routing/">route requests</a> to a view handler, the next logical step 
+was to use a template to render an HTML response. One of the functions I was accustomed to when I was using 
+Django was the reverse function in Django templates.  This function allowed the programmer to follow the DRY 
+principle by referencing a URL pattern by name instead of hard-coding it in the template.  I wasn't able to 
+find something similar in Go's templating library but I was able to implement it relatively easily using the mux
+routing library.</p>
+<p>First you would define your route in main or init function.</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">router</span> <span class="o">*</span><span class="nx">mux</span><span class="p">.</span><span class="nx">Router</span>
+
+<span class="kd">func</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">router</span> <span class="p">=</span> <span class="nx">mux</span><span class="p">.</span><span class="nx">NewRouter</span><span class="p">()</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/view/{pageName:.*}&quot;</span><span class="p">,</span> <span class="nx">viewPage</span><span class="p">).</span><span class="nx">Name</span><span class="p">(</span><span class="s">&quot;view&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
 
-<p>Add these lines to /etc/stunnel/stunnel.conf and make sure it starts
-properly (you may have to edit /etc/default/stunnel so that it starts
-automatically on boot):</p>
-<div class="highlight"><pre><span class="k">[smtp-tls-wrapper]</span>
-<span class="na">accept</span> <span class="o">=</span> <span class="s">127.0.0.1:1125</span>
-<span class="na">client</span> <span class="o">=</span> <span class="s">yes</span>
-<span class="na">connect</span> <span class="o">=</span> <span class="s">email-smtp.us-east-1.amazonaws.com:465</span>
+<p>A viewPage function is called whenever a request is received at the URL "/view/myPage".  The function is named "view" 
+in the router and can be referenced by this name later in the template.</p>
+<p>Below is a simple view handler that grabs a couple of template files and renders them to the response.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="nx">viewPage</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">page</span> <span class="p">=</span> <span class="nx">parseTemplates</span><span class="p">(</span>
+        <span class="s">&quot;templates/base.html&quot;</span><span class="p">,</span>
+        <span class="s">&quot;templates/view.html&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
-<p>Update Postfix /etc/postfix/main.cf. There may already be smtpd versions
-but you need to add the smtp version of the options as well.</p>
-<div class="highlight"><pre><span class="n">relayhost</span> <span class="o">=</span> <span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">1125</span>
-<span class="n">smtp_sasl_auth_enable</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="n">smtp_sasl_security_options</span> <span class="o">=</span> <span class="n">noanonymous</span>
-<span class="n">smtp_tls_security_level</span> <span class="o">=</span> <span class="n">may</span>
-<span class="n">smtp_sasl_password_maps</span> <span class="o">=</span> <span class="n">hash</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">postfix</span><span class="o">/</span><span class="n">sasl_passwd</span>
+<p>As you can see, the view handler passes the template files to a parseTemplates function.  I created a parseTemplates 
+function that is used by many handlers to help render the response.  Below is what the function looks like.</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">funcs</span> <span class="p">=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">FuncMap</span><span class="p">{</span>
+    <span class="s">&quot;reverse&quot;</span><span class="p">:</span> <span class="nx">reverse</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">parseTemplates</span><span class="p">(</span><span class="nx">files</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">template</span><span class="p">.</span><span class="nx">Template</span> <span class="p">{</span>
+    <span class="c1">// Uses the first template file as the base name</span>
+    <span class="nx">name</span> <span class="o">:=</span> <span class="nx">filepath</span><span class="p">.</span><span class="nx">Base</span><span class="p">(</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1">// Specifies a function map for this template</span>
+    <span class="nx">t</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">name</span><span class="p">).</span><span class="nx">Funcs</span><span class="p">(</span><span class="nx">funcs</span><span class="p">)</span>
+
+    <span class="c1">// Adds the rest of the template files to the template object</span>
+    <span class="nx">t</span> <span class="p">=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">Must</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">ParseFiles</span><span class="p">(</span><span class="nx">files</span><span class="o">...</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nx">t</span>
+<span class="p">}</span>
 </pre></div>
 
 
-<p>Create/Edit /etc/postfix/sasl_passwd file with the contents and
-replacing username/password from credentials.csv</p>
-<div class="highlight"><pre><span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">1125</span> <span class="n">USERNAME</span><span class="o">:</span><span class="n">PASSWORD</span>
+<p>The key thing here is the function map.  The function map specifies functions that can invoked from the template. 
+We specify a single function called "reverse" in our map.  Below is the implementation.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="nx">reverse</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">things</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="c1">//convert the things to strings</span>
+    <span class="nx">strs</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">things</span><span class="p">))</span>
+    <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">th</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">things</span> <span class="p">{</span>
+        <span class="nx">strs</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprint</span><span class="p">(</span><span class="nx">th</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">//grab the route</span>
+    <span class="nx">u</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">router</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">name</span><span class="p">).</span><span class="nx">URL</span><span class="p">(</span><span class="nx">strs</span><span class="o">...</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">u</span><span class="p">.</span><span class="nx">Path</span>
+<span class="p">}</span>
 </pre></div>
 
 
-<p>Execute the command line:</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">postmap</span> <span class="n">hash</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">postfix</span><span class="o">/</span><span class="n">sasl_passwd</span>
+<p>The reverse function accepts a "name" argument.  The function then looks up the name in the mux router and returns 
+the path to the function.  A template can use the code in the following manner.</p>
+<div class="highlight"><pre>&lt;a href=&quot;{{ reverse &quot;view&quot; &quot;pageName&quot; &quot;myPage&quot; }}&quot;&gt;Link&lt;/a&gt;
 </pre></div>
 
 
-<p>A hash file is created. You can remove the original
-/etc/postfix/sasl_passwd file.</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">rm</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">postfix</span><span class="o">/</span><span class="n">sasl_passwd</span>
+<p>This will generate HTML that will look like the following.</p>
+<div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/view/myPage&quot;</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
 </pre></div>
-
-
-<p>Restart Postfix:</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">postfix</span> <span class="n">restart</span>
-</pre></div>
-
-
-<p>You should also update your DNS TXT field with an SPF record to bypass
-Spam/Junk folders:</p>
-<div class="highlight"><pre><span class="s">&quot;v=spf1 a mx a:yourserver.yourdomain.com include:yourdomain.com include:amazonses.com ~all&quot;</span>
-</pre></div>
-
-
-<p>You should also set up DKIM to have your emails less likely to be
-identified as spam.</p>
             </div>
             <!-- /.entry-content -->
     <hr/>
@@ -171,8 +202,8 @@ identified as spam.</p>
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'alexvictorchan'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'how-to-configure-postfix-for-ses';
-                var disqus_url = 'http://www.alexvictorchan.com/2013/03/05/how-to-configure-postfix-for-ses/';
+                    var disqus_identifier = 'go-template-reverse-function';
+                var disqus_url = 'http://www.alexvictorchan.com/2014/11/16/go-template-reverse-function/';
 
             var disqus_config = function () {
                 this.language = "en";
