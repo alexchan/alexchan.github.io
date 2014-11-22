@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alex Victor Chan</title><link>http://www.alexvictorchan.com/</link><description></description><atom:link href="http://www.alexvictorchan.com/feeds/alex.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 16 Nov 2014 08:00:00 -0800</lastBuildDate><item><title>Reverse Function in Go Template</title><link>http://www.alexvictorchan.com/2014/11/16/go-template-reverse-function/</link><description>&lt;p&gt;From a python programmer's perspective, these are lessons I've learned from developing a web app using the Go 
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alex Victor Chan</title><link>http://www.alexvictorchan.com/</link><description></description><atom:link href="http://www.alexvictorchan.com/feeds/alex.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 17 Nov 2014 08:00:00 -0800</lastBuildDate><item><title>Static Assets of a Go Web App</title><link>http://www.alexvictorchan.com/2014/11/17/go-static-assets/</link><description>&lt;p&gt;These are lessons I've learned from developing a web app using the Go programming language.&lt;/p&gt;
+&lt;p&gt;One of the functions I've used often when developing Django apps is the STATIC_PATH variable. I 
+was able to implement something similar in my Go web app.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;github.com/gorilla/mux&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;router&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Router&lt;/span&gt;
+
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nx"&gt;init&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;router&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;NewRouter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="nx"&gt;router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;HandleFunc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/static/{path:.*}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;w&lt;/span&gt; &lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ResponseWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ServeFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;URL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+  &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;Name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;static&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The above routing code defines a "static" named URL.  The named URL parses the request URL to find out what 
+resource is being requested and serves the file from the filesystem.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">alex</dc:creator><pubDate>Mon, 17 Nov 2014 08:00:00 -0800</pubDate><guid>tag:www.alexvictorchan.com,2014-11-17:2014/11/17/go-static-assets/</guid><category>golang</category><category>go</category><category>static assets</category></item><item><title>Reverse Function in Go Template</title><link>http://www.alexvictorchan.com/2014/11/16/go-template-reverse-function/</link><description>&lt;p&gt;From a python programmer's perspective, these are lessons I've learned from developing a web app using the Go 
 programming language.&lt;/p&gt;
 &lt;p&gt;After understanding how to &lt;a href="http://www.alexvictorchan.com/2014/11/06/go-project-structure/"&gt;structure&lt;/a&gt; a go 
 web app and &lt;a href="http://www.alexvictorchan.com/2014/11/14/go-routing/"&gt;route requests&lt;/a&gt; to a view handler, the next logical step 
